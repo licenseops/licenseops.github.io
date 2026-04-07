@@ -33,6 +33,5 @@ coverage/
 # OS
 Thumbs.db
 
-# Local planning / AI agent context (not published)
-CLAUDE.md
+# Local planning 
 TASK.md
