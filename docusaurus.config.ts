@@ -15,7 +15,7 @@ const config: Config = {
   baseUrl: '/',
   trailingSlash: true,
 
-  organizationName: 'chalindukodikara',
+  organizationName: 'licenseops',
   projectName: 'licenseops.github.io',
 
   onBrokenLinks: 'throw',
@@ -46,7 +46,7 @@ const config: Config = {
             },
           },
           editUrl:
-            'https://github.com/chalindukodikara/licenser-website/edit/main/',
+            'https://github.com/licenseops/licenseops.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
@@ -55,7 +55,7 @@ const config: Config = {
             xslt: true,
           },
           editUrl:
-            'https://github.com/chalindukodikara/licenser-website/edit/main/',
+            'https://github.com/licenseops/licenseops.github.io/edit/main/',
           onInlineTags: 'throw',
           onInlineAuthors: 'throw',
           onUntruncatedBlogPosts: 'throw',
