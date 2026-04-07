@@ -1,0 +1,30 @@
+.homepage {
+  --section-bg-primary: var(--ifm-color-gray-100);
+  --section-bg-secondary: var(--ifm-color-gray-0);
+
+  width: 100%;
+  overflow-x: hidden;
+}
+
+[data-theme='dark'] .homepage {
+  --section-bg-primary: var(--ifm-background-color);
+  --section-bg-secondary: var(--ifm-background-surface-color);
+}
+
+.homepage > section {
+  padding: 5rem 0;
+}
+
+@media screen and (max-width: 768px) {
+  .homepage > section {
+    padding: 3.75rem 0;
+  }
+}
+
+.homepage > section:nth-child(odd) {
+  background: var(--section-bg-primary);
+}
+
+.homepage > section:nth-child(even) {
+  background: var(--section-bg-secondary);
+}

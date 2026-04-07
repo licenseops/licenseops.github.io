@@ -1,0 +1,7 @@
+release:
+  label: Release
+  description: Release announcements
+
+announcement:
+  label: Announcement
+  description: General announcements

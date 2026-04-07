@@ -1,0 +1,81 @@
+.section {
+  padding: 0 0 2rem;
+}
+
+.tableContainer {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 1rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-heading-color);
+}
+
+.table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.styleCode {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.extras {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.extraCard {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--ifm-card-background-color);
+}
+
+[data-theme='dark'] .extraCard {
+  background: var(--ifm-background-surface-color);
+}
+
+.extraCard h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.extraCard p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+@media screen and (max-width: 768px) {
+  .extras {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .tableContainer {
+    padding: 0 1rem;
+  }
+}
