@@ -6,6 +6,9 @@ description: LicenseOps (lops) is a fast CLI tool to check, fix, and migrate lic
 slug: /
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # LicenseOps (`lops`)
 
 A fast CLI tool to check, fix, and migrate license headers across 50+ languages. Supports SPDX, REUSE, Apache/GPL boilerplates, and custom templates. Built for CI pipelines, pre-commit hooks, and local development.
@@ -30,12 +33,42 @@ A fast CLI tool to check, fix, and migrate license headers across 50+ languages.
 
 ### Binary
 
-Download from [Releases](https://github.com/licenseops/licenseops/releases):
+Download the binary for your platform from [Releases](https://github.com/licenseops/licenseops/releases):
+
+<Tabs groupId="operating-systems">
+<TabItem value="macos-arm" label="macOS (Apple Silicon)" default>
 
 ```bash
-curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/lops_Linux_x86_64.tar.gz | tar xz
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_darwin_arm64.tar.gz | tar xz
 sudo mv lops /usr/local/bin/
 ```
+
+</TabItem>
+<TabItem value="macos-intel" label="macOS (Intel)">
+
+```bash
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_darwin_amd64.tar.gz | tar xz
+sudo mv lops /usr/local/bin/
+```
+
+</TabItem>
+<TabItem value="linux-amd" label="Linux (x64)">
+
+```bash
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_linux_amd64.tar.gz | tar xz
+sudo mv lops /usr/local/bin/
+```
+
+</TabItem>
+<TabItem value="linux-arm" label="Linux (ARM)">
+
+```bash
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_linux_arm64.tar.gz | tar xz
+sudo mv lops /usr/local/bin/
+```
+
+</TabItem>
+</Tabs>
 
 ### Go install
 
@@ -50,7 +83,7 @@ go install github.com/licenseops/licenseops/cmd/lops@latest
 docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:latest check
 
 # Pinned to exact version
-docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:0.1.0 check
+docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:0.2.0 check
 
 # Latest development build (tracks main branch)
 docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:latest-dev check
@@ -148,7 +181,7 @@ Precedence: **CLI flags > config file > defaults**
 
 ## Next Steps
 
-- [Getting Started](getting-started.md) — install and add headers in 3 minutes
+- [Getting Started](getting-started.mdx) — install and add headers in 3 minutes
 - [Configuration Guide](configuration.md) — full config file reference, CLI flags, and merge rules
 - [Header Formats](formats.md) — side-by-side format comparison to choose the right one
 - [Use Cases](use-cases.md) — 12 real-world scenarios with example configs

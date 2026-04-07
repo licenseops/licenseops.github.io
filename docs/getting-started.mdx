@@ -5,24 +5,60 @@ title: Getting Started
 description: Install LicenseOps and add license headers to your project in under 3 minutes.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Getting Started
 
 Get from zero to compliant license headers in 3 minutes.
 
 ## 1. Install
 
-Pick one:
+Pick the binary for your platform:
+
+<Tabs groupId="operating-systems">
+<TabItem value="macos-arm" label="macOS (Apple Silicon)" default>
 
 ```bash
-# Binary (Linux/macOS)
-curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/lops_Linux_x86_64.tar.gz | tar xz
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_darwin_arm64.tar.gz | tar xz
 sudo mv lops /usr/local/bin/
+```
 
+</TabItem>
+<TabItem value="macos-intel" label="macOS (Intel)">
+
+```bash
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_darwin_amd64.tar.gz | tar xz
+sudo mv lops /usr/local/bin/
+```
+
+</TabItem>
+<TabItem value="linux-amd" label="Linux (x64)">
+
+```bash
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_linux_amd64.tar.gz | tar xz
+sudo mv lops /usr/local/bin/
+```
+
+</TabItem>
+<TabItem value="linux-arm" label="Linux (ARM)">
+
+```bash
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_linux_arm64.tar.gz | tar xz
+sudo mv lops /usr/local/bin/
+```
+
+</TabItem>
+</Tabs>
+
+Or use one of the alternative install methods:
+
+```bash
 # Go install
 go install github.com/licenseops/licenseops/cmd/lops@latest
 
 # Docker (no install needed)
-docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops check
+docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:latest check
 ```
 
 Verify it works:
@@ -89,7 +125,7 @@ Add a license check to your GitHub Actions pipeline:
 ```yaml
 - name: Install lops
   run: |
-    curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenser_Linux_x86_64.tar.gz | tar xz
+    curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenseops_linux_amd64.tar.gz | tar xz
     sudo mv lops /usr/local/bin/
 
 - name: Check license headers
