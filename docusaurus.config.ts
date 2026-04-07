@@ -16,7 +16,7 @@ const config: Config = {
   trailingSlash: true,
 
   organizationName: 'chalindukodikara',
-  projectName: 'licenser-website',
+  projectName: 'licenseops.github.io',
 
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
