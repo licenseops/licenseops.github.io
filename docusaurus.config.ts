@@ -39,6 +39,12 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          lastVersion: 'v0.2.0',
+          versions: {
+            'v0.2.0': {
+              label: 'v0.2.0',
+            },
+          },
           editUrl:
             'https://github.com/licenseops/licenseops.github.io/edit/main/',
         },
@@ -90,6 +96,10 @@ const config: Config = {
           label: 'Documentation',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
         {
           href: 'https://github.com/licenseops/licenseops',
           position: 'right',

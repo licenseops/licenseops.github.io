@@ -29,7 +29,7 @@ After creating a version, update `lastVersion` and `versions` in `docusaurus.con
 docusaurus.config.ts          # Site config: navbar, footer, Algolia, prism, versioning
 sidebars.ts                   # Sidebar navigation structure
 docs/                         # Current (next) docs — becomes "Next" version
-versioned_docs/               # Snapshotted versioned docs (empty until v0.2.0 is cut)
+versioned_docs/               # Snapshotted versioned docs (e.g. version-v0.2.0/)
 versioned_sidebars/           # Sidebar config per version
 versions.json                 # List of doc versions
 src/
@@ -103,13 +103,21 @@ Configured in `docusaurus.config.ts` with placeholder credentials. To activate:
 
 ### Create a new doc version
 
-There are currently no released doc versions — `versioned_docs/` is empty and `versions.json` is `[]`. The first version snapshot will be cut at v0.2.0.
-
 ```bash
-npx docusaurus docs:version v0.2.0
+npx docusaurus docs:version vX.Y.Z
 ```
 
-Then update `docusaurus.config.ts` to add `lastVersion` and `versions`, and re-enable the `docsVersionDropdown` in the navbar.
+Then update `docusaurus.config.ts`:
+
+```ts
+docs: {
+  lastVersion: 'vX.Y.Z',
+  versions: {
+    'vX.Y.Z': { label: 'vX.Y.Z' },
+    'v0.2.0': { label: 'v0.2.0' },
+  },
+}
+```
 
 ### Add a blog post
 
