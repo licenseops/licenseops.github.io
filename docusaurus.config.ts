@@ -39,12 +39,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          lastVersion: 'v0.1.0',
-          versions: {
-            'v0.1.0': {
-              label: 'v0.1.0',
-            },
-          },
           editUrl:
             'https://github.com/licenseops/licenseops.github.io/edit/main/',
         },
@@ -97,11 +91,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          type: 'docsVersionDropdown',
-          position: 'right',
-        },
-        {
-          href: 'https://github.com/chalindukodikara/licenseops',
+          href: 'https://github.com/licenseops/licenseops',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -137,11 +127,11 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Issues',
-              href: 'https://github.com/chalindukodikara/licenseops/issues',
+              href: 'https://github.com/licenseops/licenseops/issues',
             },
             {
               label: 'Report Issues',
-              href: 'https://github.com/chalindukodikara/licenseops/issues',
+              href: 'https://github.com/licenseops/licenseops/issues',
             },
           ],
         },
@@ -154,7 +144,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/chalindukodikara/licenseops',
+              href: 'https://github.com/licenseops/licenseops',
             },
           ],
         },

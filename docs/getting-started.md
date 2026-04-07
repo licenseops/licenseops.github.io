@@ -15,14 +15,14 @@ Pick one:
 
 ```bash
 # Binary (Linux/macOS)
-curl -sSL https://github.com/chalindukodikara/licenseops/releases/latest/download/lops_Linux_x86_64.tar.gz | tar xz
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/lops_Linux_x86_64.tar.gz | tar xz
 sudo mv lops /usr/local/bin/
 
 # Go install
-go install github.com/chalindukodikara/licenseops/cmd/lops@latest
+go install github.com/licenseops/licenseops/cmd/lops@latest
 
 # Docker (no install needed)
-docker run --rm -v "$PWD":/src -w /src ghcr.io/chalindukodikara/licenseops check
+docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops check
 ```
 
 Verify it works:
@@ -89,7 +89,7 @@ Add a license check to your GitHub Actions pipeline:
 ```yaml
 - name: Install lops
   run: |
-    curl -sSL https://github.com/chalindukodikara/licenseops/releases/latest/download/licenser_Linux_x86_64.tar.gz | tar xz
+    curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/licenser_Linux_x86_64.tar.gz | tar xz
     sudo mv lops /usr/local/bin/
 
 - name: Check license headers

@@ -101,3 +101,4 @@ LicenseOps detects comment style by file extension. If a file has an unusual ext
 | 0    | All files compliant (check) or all fixed (fix)        | Nothing to do                  |
 | 1    | Non-compliant files found                             | Run `lops fix` or fix manually |
 | 2    | Runtime error (bad config, IO error, invalid license) | Check the error message        |
+| 3    | Partial failure (some errors and some non-compliant)  | Inspect failures and re-run    |

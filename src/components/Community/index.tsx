@@ -14,17 +14,17 @@ const communityActions: CommunityAction[] = [
   {
     description: 'Help shape LicenseOps by submitting features, fixes, or improvements.',
     buttonText: 'Contribute',
-    link: 'https://github.com/chalindukodikara/licenseops',
+    link: 'https://github.com/licenseops/licenseops',
   },
   {
     description: 'Found a bug or have an idea? Open an issue and let us know.',
     buttonText: 'Report Issues',
-    link: 'https://github.com/chalindukodikara/licenseops/issues',
+    link: 'https://github.com/licenseops/licenseops/issues',
   },
   {
     description: 'Ask questions, share use cases, and connect with other users.',
     buttonText: 'Discussions',
-    link: 'https://github.com/chalindukodikara/licenseops/issues',
+    link: 'https://github.com/licenseops/licenseops/issues',
   },
 ];
 

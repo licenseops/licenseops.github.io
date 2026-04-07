@@ -2,7 +2,7 @@
 
 ## What is This Project
 
-Documentation website for [LicenseOps](https://github.com/chalindukodikara/licenseops) (`lops`), built with Docusaurus 3 and TypeScript. Deployed to GitHub Pages.
+Documentation website for [LicenseOps](https://github.com/licenseops/licenseops) (`lops`), built with Docusaurus 3 and TypeScript. Deployed to GitHub Pages.
 
 ## Quick Reference
 
@@ -29,7 +29,7 @@ After creating a version, update `lastVersion` and `versions` in `docusaurus.con
 docusaurus.config.ts          # Site config: navbar, footer, Algolia, prism, versioning
 sidebars.ts                   # Sidebar navigation structure
 docs/                         # Current (next) docs — becomes "Next" version
-versioned_docs/               # Snapshotted versioned docs (e.g. version-v0.1.0/)
+versioned_docs/               # Snapshotted versioned docs (empty until v0.2.0 is cut)
 versioned_sidebars/           # Sidebar config per version
 versions.json                 # List of doc versions
 src/
@@ -103,20 +103,13 @@ Configured in `docusaurus.config.ts` with placeholder credentials. To activate:
 
 ### Create a new doc version
 
+There are currently no released doc versions — `versioned_docs/` is empty and `versions.json` is `[]`. The first version snapshot will be cut at v0.2.0.
+
 ```bash
 npx docusaurus docs:version v0.2.0
 ```
 
-Then update `docusaurus.config.ts`:
-```ts
-docs: {
-  lastVersion: 'v0.2.0',
-  versions: {
-    'v0.2.0': { label: 'v0.2.0' },
-    'v0.1.0': { label: 'v0.1.0' },
-  },
-}
-```
+Then update `docusaurus.config.ts` to add `lastVersion` and `versions`, and re-enable the `docsVersionDropdown` in the navbar.
 
 ### Add a blog post
 

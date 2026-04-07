@@ -1,6 +1,6 @@
 # LicenseOps Website
 
-The documentation website for [LicenseOps](https://github.com/chalindukodikara/licenseops) (`lops`), built with [Docusaurus](https://docusaurus.io/).
+The documentation website for [LicenseOps](https://github.com/licenseops/licenseops) (`lops`), built with [Docusaurus](https://docusaurus.io/).
 
 ## Local Development
 

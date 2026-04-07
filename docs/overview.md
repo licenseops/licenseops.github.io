@@ -10,46 +10,61 @@ slug: /
 
 A fast CLI tool to check, fix, and migrate license headers across 50+ languages. Supports SPDX, REUSE, Apache/GPL boilerplates, and custom templates. Built for CI pipelines, pre-commit hooks, and local development.
 
-> **Why "LicenseOps"?** — "License" says what it manages, "Ops" signals it's an operational tool built for automation — CI pipelines, pre-commit hooks, workflows. The CLI binary is `lops` (**L**icense**Ops**) — 4 characters, fast to type.
+> **Why "LicenseOps"?** — "License" says what it manages, "Ops" signals it's an operational tool built for automation — CI pipelines, pre-commit hooks, workflows. The CLI binary is `lops` (**L**icense**Ops**) — 4 characters, fast to type, same pattern as Kubernetes → `kubectl`, Terraform → `tf`.
 
 ## Features
 
-- **Check & Fix** — validate headers or auto-add/replace them in-place
+- **Check, Fix, Remove** — validate headers, auto-add/replace them, or strip them entirely
 - **Multiple formats** — SPDX short (1-line and 2-line), REUSE, Apache 2.0 boilerplate, GPL/LGPL/AGPL boilerplate, custom templates
 - **50+ languages** — correct comment syntax for Go, Rust, Python, JavaScript/TypeScript, Java, C/C++, Shell, YAML, CSS, HTML, SQL, and [many more](supported-languages.md)
 - **SPDX expressions** — `Apache-2.0 OR MIT`, `GPL-3.0-only WITH Classpath-exception-2.0`
 - **Smart handling** — preserves shebangs and Python encoding declarations, skips generated files and binaries
 - **Gitignore-aware** — respects `.gitignore` patterns automatically
-- **Cross-format migration** — switch from one header format to another without manual cleanup
-- **CI-ready** — exit codes, `--dry-run`, Docker image, GitHub Actions compatible
+- **Cross-format migration** — switch from one header format to another without manual cleanup; old headers are fully detected, stripped, and replaced
+- **Parallel processing** — files are processed concurrently for fast execution on large codebases
+- **Structured output** — `--output json` and `--output sarif` for CI tooling and GitHub Code Scanning
+- **CI-ready** — exit codes 0/1/2/3, `--dry-run`, `--diff`, Docker image, GitHub Actions compatible
 - **Zero config viable** — works with just `lops check -l MIT -o "Your Name" .`
 
 ## Installation
 
 ### Binary
 
-Download from [Releases](https://github.com/chalindukodikara/licenseops/releases):
+Download from [Releases](https://github.com/licenseops/licenseops/releases):
 
 ```bash
-curl -sSL https://github.com/chalindukodikara/licenseops/releases/latest/download/lops_Linux_x86_64.tar.gz | tar xz
+curl -sSL https://github.com/licenseops/licenseops/releases/latest/download/lops_Linux_x86_64.tar.gz | tar xz
 sudo mv lops /usr/local/bin/
 ```
 
 ### Go install
 
 ```bash
-go install github.com/chalindukodikara/licenseops/cmd/lops@latest
+go install github.com/licenseops/licenseops/cmd/lops@latest
 ```
 
 ### Docker
 
 ```bash
-docker run --rm -v "$PWD":/src -w /src ghcr.io/chalindukodikara/licenseops check
+# Latest stable release
+docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:latest check
+
+# Pinned to exact version
+docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:0.1.0 check
+
+# Latest development build (tracks main branch)
+docker run --rm -v "$PWD":/src -w /src ghcr.io/licenseops/licenseops:latest-dev check
 ```
 
 ## Quick Start
 
-**Check** compliance:
+**Initialize** a config file (interactive):
+
+```bash
+lops init
+```
+
+Or **check** compliance directly:
 
 ```bash
 lops check -l Apache-2.0 -o "Acme Corp" .
@@ -61,7 +76,20 @@ lops check -l Apache-2.0 -o "Acme Corp" .
 lops fix -l Apache-2.0 -o "Acme Corp" .
 ```
 
-**Config file** — create `.licenseops.yaml` in your project root:
+**Preview** changes as a unified diff:
+
+```bash
+lops fix --diff
+```
+
+**Remove** all headers:
+
+```bash
+lops remove --dry-run    # preview first
+lops remove              # then remove
+```
+
+**Config file** — create `.licenseops.yaml` in your project root (or use `lops init`):
 
 ```yaml
 license: Apache-2.0
@@ -94,24 +122,29 @@ See [Header Format Comparison](formats.md) for side-by-side examples.
 ## CLI Flags
 
 ```
--l, --license     SPDX license identifier or expression
--o, --owner       copyright holder
--f, --format      header format (spdx, reuse, apache-long, gpl-long, custom)
--y, --year        copyright year
--c, --config      config file path (default: .licenseops.yaml)
--v, --verbose     show status of every file
-    --dry-run     preview changes without modifying files (fix only)
+-l, --license         SPDX license identifier or expression
+-o, --owner           copyright holder
+-f, --format          header format (spdx, reuse, apache-long, gpl-long, custom)
+-y, --year            copyright year
+-c, --config          config file path (default: .licenseops.yaml)
+-v, --verbose         show status of every file
+    --dry-run         preview changes without modifying files (fix/remove)
+    --diff            show unified diff of changes (fix, implies dry-run)
+    --excluded-only   invert scan; process only files matching exclude
+                      patterns from your config (remove only)
+    --output          output format: text (default), json, sarif
 ```
 
 Precedence: **CLI flags > config file > defaults**
 
 ## Exit Codes
 
-| Code | Meaning                               |
-| ---- | ------------------------------------- |
-| 0    | All files compliant / all files fixed |
-| 1    | Non-compliant files found             |
-| 2    | Runtime error                         |
+| Code | Meaning                                              |
+| ---- | ---------------------------------------------------- |
+| 0    | All files compliant / all files fixed                |
+| 1    | Non-compliant files found                            |
+| 2    | Runtime error                                        |
+| 3    | Partial failure (some errors and some non-compliant) |
 
 ## Next Steps
 
@@ -125,4 +158,4 @@ Precedence: **CLI flags > config file > defaults**
 
 ## License
 
-Apache-2.0 — see [LICENSE](https://github.com/chalindukodikara/licenseops/blob/main/LICENSE)
+Apache-2.0 — see [LICENSE](https://github.com/licenseops/licenseops/blob/main/LICENSE)

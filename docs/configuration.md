@@ -70,15 +70,18 @@ gitignore: true # respect .gitignore patterns
 
 ## CLI Flags
 
-| Flag        | Short | Default            | Description                   |
-| ----------- | ----- | ------------------ | ----------------------------- |
-| `--license` | `-l`  | _none_             | SPDX license ID or expression |
-| `--owner`   | `-o`  | _none_             | Copyright holder              |
-| `--format`  | `-f`  | `spdx`             | Header format                 |
-| `--year`    | `-y`  | Current year       | Copyright year                |
-| `--config`  | `-c`  | `.licenseops.yaml` | Config file path              |
-| `--verbose` | `-v`  | `false`            | Show every file               |
-| `--dry-run` |       | `false`            | Preview changes (fix only)    |
+| Flag              | Short | Default            | Description                                                             |
+| ----------------- | ----- | ------------------ | ----------------------------------------------------------------------- |
+| `--license`       | `-l`  | _none_             | SPDX license ID or expression                                           |
+| `--owner`         | `-o`  | _none_             | Copyright holder                                                        |
+| `--format`        | `-f`  | `spdx`             | Header format                                                           |
+| `--year`          | `-y`  | Current year       | Copyright year                                                          |
+| `--config`        | `-c`  | `.licenseops.yaml` | Config file path                                                        |
+| `--verbose`       | `-v`  | `false`            | Show every file                                                         |
+| `--dry-run`       |       | `false`            | Preview changes (fix/remove)                                            |
+| `--diff`          |       | `false`            | Show unified diff (fix only, implies dry-run)                           |
+| `--excluded-only` |       | `false`            | Invert scan; process only files matching exclude patterns (remove only) |
+| `--output`        |       | `text`             | Output format: text, json, sarif                                        |
 
 No flag is required on the command line — all values can be provided via the config file instead. The tool validates that required **values** are present (from either source) before running.
 
@@ -224,6 +227,26 @@ These are always excluded even without config:
 
 User-defined exclude patterns are **added on top** of these defaults — they never replace them.
 
+### Cleaning Up Headers in Excluded Files
+
+If you've added new entries to your `exclude:` list and want to strip the
+license headers that are still present in those files, use:
+
+```bash
+lops remove --excluded-only --dry-run    # preview
+lops remove --excluded-only              # actually strip
+```
+
+`--excluded-only` inverts the scanner: it walks the entire tree but only
+processes files that match a pattern from your config's `exclude:` block.
+Built-in defaults (`.git/**`, `vendor/**`, `node_modules/**`,
+`third_party/**`, `.licenseops.yaml`) and gitignore filtering are bypassed
+in this mode so the cleanup targets exactly what you declared excluded.
+
+This flag is only available on `remove`; it does not exist on `check` or
+`fix`, since validating or fixing excluded files would defeat the purpose
+of excluding them.
+
 ## SPDX License Expressions
 
 The `license` field accepts full SPDX expressions, not just single IDs.
@@ -242,10 +265,28 @@ license: 'Apache-2.0 OR MIT'
 
 Produces: `// SPDX-License-Identifier: Apache-2.0 OR MIT`
 
+### Multiple Licenses (all apply)
+
+```yaml
+license: 'Apache-2.0 AND MIT'
+```
+
+### Complex Expressions
+
+```yaml
+license: 'Apache-2.0 AND (MIT OR GPL-2.0-only)'
+```
+
 ### License with Exception
 
 ```yaml
 license: 'GPL-3.0-only WITH Classpath-exception-2.0'
+```
+
+### Or-Later (non-GNU)
+
+```yaml
+license: 'EPL-1.0+'
 ```
 
 ### GNU Convention
